@@ -12,6 +12,10 @@ using HolidayManagement.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using HolidayManagement.DataAccess;
+using HolidayManagement.ApplicationLogic.Services;
+using HolidayManagement.ApplicationLogic.Abstractions;
+using HolidayManagement.DataAccess.Repositories;
 
 namespace HolidayManagement
 {
@@ -30,8 +34,22 @@ namespace HolidayManagement
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<HolidayManagementDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection1")));
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<EmployeeService>();
+            services.AddScoped<HolidayService>();
+            services.AddScoped<HolidayApplicationService>();
+
+            services.AddScoped<IHolidayApplicationRepository, EFHolidayApplicationRepository>();
+            services.AddScoped<IEmployeeRepository, EFEmployeeRepository>();
+            services.AddScoped<IHolidayRepository, EFHolidayRepository>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
