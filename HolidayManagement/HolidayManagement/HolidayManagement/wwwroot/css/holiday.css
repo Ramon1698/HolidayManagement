@@ -1,0 +1,81 @@
+﻿:root{
+    --primary: #ddd;
+    --dark: #333;
+    --light: #fff;
+    --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
+}
+
+body{
+    background-color: var(--primary);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    width: 90vw;
+    height: 100vh;
+    margin: auto !important;
+}
+
+.my-nav {
+    background-color: lightgray;
+    flex: 1;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+}
+
+.nav-links{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    padding: 1rem 2rem 0 3rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.nav-link:hover{
+    background-color: black !important;
+    color: #fff !important;
+}
+
+.container{
+    flex: 5;
+    background-color: lightgray;
+    margin: 1rem 0;
+    padding: 2.5rem 5rem !important;
+}
+
+.button-design{
+    padding: 0.8rem 1.8rem;
+    color: black;
+    background-color: white;
+}
+
+.margin-top{
+    margin-top: 2rem;
+}
+
+.holidays-table{
+    background-color: #fff;
+    color: black;
+}
+
+.button-design:hover {
+    color: white;
+    background-color: black;
+}
+
+.customize-tag-a{
+    color: #007bff !important;
+    cursor: pointer;
+}
+
+.holiday-title {
+    background: linear-gradient(black, #969590);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+

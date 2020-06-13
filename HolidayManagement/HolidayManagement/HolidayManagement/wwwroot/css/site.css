@@ -62,10 +62,74 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
 }
+
+.btn{
+    padding: 0.6rem 1.3rem;
+    background-color: #ddd;
+    color: #333;
+    font-weight: 900;
+    box-shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
+}
+
+.btn:hover{
+    background-color: #333;
+    color: #ddd;
+}
+
+.new-holiday-btn{
+    margin-bottom: 0.8rem;
+}
+
+.section-holidays {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
+    grid-auto-rows: 300px;
+    grid-gap: 20px;
+}
+
+.box-holiday{
+    background-color: #ddd;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem 1rem 1rem 1rem;
+    overflow: hidden;
+    height: 100%;
+}
+
+.box-holiday h4 {
+    font-weight: 900;
+    padding-bottom: 0.5rem;
+    
+}
+
+.box-holiday p {
+    flex: 10;
+}
+
+.read-more-btn{
+    flex: 1;
+    display: flex;
+    justify-content: stretch;
+    text-align: center;
+}
+
+.read-more-btn:hover{
+    color: #ddd !important;
+}
+
+.read-more-btn p{
+    margin: 0;
+    padding: 0;
+}
+

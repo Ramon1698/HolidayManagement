@@ -1,0 +1,104 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="~/css/holiday.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <header>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        
+        <script>
+            $(document).ready(function () {
+                loadServerPartialView("#mainContainer", "/Holiday/GetHolidays");
+                consistentStyle("holidaysTable");
+                addHoliday();
+                holidaysTable();
+            });
+
+            function addHoliday() {
+                $("#addHoliday").on("click", function () {
+                    loadServerPartialView("#mainContainer", "/Holiday/Create");
+                    consistentStyle("addHoliday");
+                });
+            }
+
+            function holidaysTable() {
+                $("#holidaysTable").on("click", function () {
+                    loadServerPartialView("#mainContainer", "/Holiday/GetHolidays");
+                    consistentStyle("holidaysTable");
+                });
+            }
+
+            function loadEditFunction(holidayId) {
+                loadServerPartialView("#mainContainer", "/Holiday/Edit?id=" + holidayId);
+            }
+
+            function loadReadMoreFunction(holidayId) {
+                loadServerPartialView("#mainContainer", "/Holiday/ReadMore?id=" + holidayId);
+            }
+
+            function consistentStyle(id) {
+                document.getElementById(id).style.color = "white";
+                document.getElementById(id).style.backgroundColor = "black";
+                removeStyles(id);
+            }
+
+            function nonConsistentStyle(id) {
+                document.getElementById(id).style.color = "black";
+                document.getElementById(id).style.backgroundColor = "lightgray"; 
+            }
+            
+            function removeStyles(id) {
+                var arrayNavLinks = [
+                    "holidaysTable",
+                    "addHoliday",
+                    "employeesTable",
+                    "addEmployee",
+                    "myHolidays",
+                    "holidayApplication",
+                    "holidaysToApprove"
+                ];
+
+                for (var i = 0; i < arrayNavLinks.length; i++) {
+                    if (id != arrayNavLinks[i]) {
+                        nonConsistentStyle(arrayNavLinks[i]);
+                    }
+                }
+            }
+
+            function loadServerPartialView(container, url) {
+                $.get(url, function (response) {
+                    $(container).html(response);
+                });
+            }
+        </script>
+    </header>
+    <nav class="my-nav">
+        <ul class="nav-links">
+            <li class="nav-link" id="holidaysTable">Holidays</li>
+            <li class="nav-link" id="addHoliday"><a>Add Holiday</a></li>
+            <li class="nav-link" id="employeesTable">Employees</li>
+            <li class="nav-link" id="addEmployee">Add Employee</li>
+            <li class="nav-link" id="myHolidays">My Holidays</li>
+            <li class="nav-link" id="holidayApplication">Holiday Application</li>
+            <li class="nav-link" id="holidaysToApprove">Holidays To Approve</li>
+            <li class="nav-link">Log out</li>
+        </ul>
+    </nav>
+    <section class="container" id="mainContainer"></section>
+</body>
+</html>
+
+    

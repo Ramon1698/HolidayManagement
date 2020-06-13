@@ -1,0 +1,35 @@
+﻿@model HolidayManagement.ViewModels.Holidays.HolidaysViewModel
+
+<table class="table table-hover">
+    <thead class="holidays-table">
+        <tr>
+            <th >Holiday</th>
+            <th >Days</th>
+            <th style="width: 15rem;"></th>
+        </tr>
+    </thead>
+    <tbody class="holidays-table">
+        @foreach (var holiday in Model.Holidays)
+        {
+            <tr>
+                <td>@holiday.Type</td>
+                @if (holiday.Days != 0)
+                {
+                    <td>@holiday.Days</td>
+                }
+                else
+                {
+                    <td>-</td>
+                }
+            <td>
+                <a onclick="loadEditFunction('@holiday.Id')" href="#">Edit</a>
+                <span style="border-left: 1px solid lightgrey; margin: 0 0.5rem;"></span>
+                <a onclick="loadReadMoreFunction('@holiday.Id')" href="#">Read More</a>
+                <span style="border-left: 1px solid lightgrey; margin: 0 0.5rem;"></span>
+                <a asp-action="Remove" asp-route-id="@holiday.Id">Remove</a>
+            </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
