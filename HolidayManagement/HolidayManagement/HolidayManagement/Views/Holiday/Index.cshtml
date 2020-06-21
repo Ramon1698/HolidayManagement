@@ -18,13 +18,16 @@
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
-        
+        <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+
         <script>
             $(document).ready(function () {
                 loadServerPartialView("#mainContainer", "/Holiday/GetHolidays");
                 consistentStyle("holidaysTable");
                 addHoliday();
                 holidaysTable();
+                addEmployee();
+                employeesTable();
             });
 
             function addHoliday() {
@@ -41,12 +44,34 @@
                 });
             }
 
-            function loadEditFunction(holidayId) {
+            function addEmployee() {
+                $("#addEmployee").on("click", function () {
+                    loadServerPartialView("#mainContainer", "/Employee/Create");
+                    consistentStyle("addEmployee");
+                });
+            }
+
+            function employeesTable() {
+                $("#employeesTable").on("click", function () {
+                    loadServerPartialView("#mainContainer", "/Employee/Index");
+                    consistentStyle("employeesTable");
+                });
+            }
+
+            function loadEditHoliday(holidayId) {
                 loadServerPartialView("#mainContainer", "/Holiday/Edit?id=" + holidayId);
             }
 
-            function loadReadMoreFunction(holidayId) {
+            function loadReadMoreHoliday(holidayId) {
                 loadServerPartialView("#mainContainer", "/Holiday/ReadMore?id=" + holidayId);
+            }
+
+            function loadEditEmployee(employeeId) {
+                loadServerPartialView("#mainContainer", "/Employee/Edit?id=" + employeeId);
+            }
+
+            function loadDetailsEmployee(employeeId) {
+                loadServerPartialView("#mainContainer", "/Employee/Details?id=" + employeeId);
             }
 
             function consistentStyle(id) {
@@ -57,9 +82,9 @@
 
             function nonConsistentStyle(id) {
                 document.getElementById(id).style.color = "black";
-                document.getElementById(id).style.backgroundColor = "lightgray"; 
+                document.getElementById(id).style.backgroundColor = "lightgray";
             }
-            
+
             function removeStyles(id) {
                 var arrayNavLinks = [
                     "holidaysTable",
@@ -78,9 +103,9 @@
                 }
             }
 
-            function loadServerPartialView(container, url) {
-                $.get(url, function (response) {
-                    $(container).html(response);
+            function loadServerPartialView(container, baseUrl) {
+                return $.get(baseUrl, function (responseData) {
+                    $(container).html(responseData);
                 });
             }
         </script>

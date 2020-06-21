@@ -1,0 +1,10 @@
+﻿@model HolidayManagement.ViewModels.Employees.DetailsEmployeeViewModel
+
+@{ var totalHolidayDays = Model.Employee.HolidayDays + Model.Employee.ConsumedHolidayDays; }
+<div>
+    <h1 class="holiday-title">@Model.Employee.Name</h1>
+    <div>Holiday Days: <p>@Model.Employee.HolidayDays / @totalHolidayDays</p></div>
+    <div><p>Contact:</p></div>
+    <div>Email: <p>@Model.Employee.Email</p></div>
+    <div>Phone: <p>@Model.Employee.PhoneNumber</p></div>
+</div>

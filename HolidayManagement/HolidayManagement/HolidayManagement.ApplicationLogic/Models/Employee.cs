@@ -11,7 +11,7 @@ namespace HolidayManagement.ApplicationLogic.Models
         public string Email { get; private set; }
         public string PhoneNumber { get; private set; }
         public int HolidayDays { get; private set; }
-        public int AvailableHoldayDays { get; private set; }
+        public int ConsumedHolidayDays { get; private set; }
 
         public static Employee Create(string userId,
                                       string name,
@@ -27,7 +27,7 @@ namespace HolidayManagement.ApplicationLogic.Models
                 Email = email,
                 PhoneNumber = phone,
                 HolidayDays = holidayDays,
-                AvailableHoldayDays = holidayDays
+                ConsumedHolidayDays = 0
             };
         }
 
@@ -36,14 +36,8 @@ namespace HolidayManagement.ApplicationLogic.Models
             this.Name = name;
             this.Email = email;
             this.PhoneNumber = phone;
-            this.AvailableHoldayDays = availableDays;
+            this.HolidayDays = availableDays;
             return this;
-        }
-
-        public int UpdateAvailableHolidayDays(int availableDays)
-        {
-            this.AvailableHoldayDays -= availableDays;
-            return this.AvailableHoldayDays;
         }
 
         public int UpdateHolidayDays(int holidayDays)

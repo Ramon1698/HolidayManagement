@@ -39,7 +39,8 @@ namespace HolidayManagement
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection1")));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddScoped<EmployeeService>();

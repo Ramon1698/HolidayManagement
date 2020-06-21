@@ -1,0 +1,36 @@
+﻿@model HolidayManagement.ViewModels.Employees.EmployeesViewModel
+
+<table class="table table-hover">
+    <thead class="holidays-table">
+        <tr>
+            <th>Employee</th>
+            <th>Email</th>
+            <th>Holiday Days</th>
+            <th style="width: 15rem;"></th>
+        </tr>
+    </thead>
+    <tbody class="holidays-table">
+        @foreach (var employee in Model.Employees)
+        {
+            <tr>
+                <td>@employee.Name</td>
+                <td>@employee.Email</td>
+                <td>
+                    @employee.HolidayDays
+                    /
+                    @{var totalHolidayDays = employee.HolidayDays + employee.ConsumedHolidayDays;}
+                    @totalHolidayDays
+                </td>
+                <td>
+                    <a onclick="loadEditEmployee('@employee.Id')" href="#">Edit</a>
+                    <span style="border-left: 1px solid lightgrey; margin: 0 0.5rem;"></span>
+                    <a onclick="loadDetailsEmployee('@employee.Id')" href="#">Details</a>
+                    <span style="border-left: 1px solid lightgrey; margin: 0 0.5rem;"></span>
+                    <a asp-action="Remove" asp-route-id="@employee.Id"
+                       data-ajax="true" data-ajax-update="#mainContainer">Remove</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
