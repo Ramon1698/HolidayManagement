@@ -1,0 +1,12 @@
+﻿@model HolidayManagement.ViewModels.HolidayApplications.DetailsHolidayApplicationViewModel
+
+<div>
+    <div style="font-size: 20px;">Employee: <p>@Model.HolidayApplication.Employee.Name</p></div>
+    <div>Holiday: <p>@Model.HolidayApplication.Holiday.Type</p></div>
+    <div>Period: <p>
+        @Model.HolidayApplication.StartDay.ToShortDateString()
+         -
+         @Model.HolidayApplication.EndDay.ToShortDateString()
+    </p></div>
+    <div>Reasons: <input type="text" value="@Model.HolidayApplication.Reasons" class="form-control" style="height: 300px; width: 60vw;"/></div>
+</div>

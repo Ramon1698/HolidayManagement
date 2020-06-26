@@ -40,10 +40,10 @@ namespace HolidayManagement.ApplicationLogic.Models
             return this;
         }
 
-        public int UpdateHolidayDays(int holidayDays)
+        public int UpdateConsumedHolidayDays(int holidayDays)
         {
-            this.HolidayDays = holidayDays;
-            return this.HolidayDays;
+            this.ConsumedHolidayDays = holidayDays;
+            return this.ConsumedHolidayDays;
         }
     }
 }

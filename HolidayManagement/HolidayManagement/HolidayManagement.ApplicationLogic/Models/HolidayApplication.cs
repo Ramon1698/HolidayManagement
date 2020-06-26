@@ -11,10 +11,11 @@ namespace HolidayManagement.ApplicationLogic.Models
         public Employee Employee { get; private set; }
         public Employee Manager { get; private set; }
         public StatusApplication Status { get; private set; }
-        public string Message { get; private set; }
+        public string Response { get; private set; }
+        public string Reasons { get; private set; }
         public DateTime StartDay { get; private set; }
         public DateTime EndDay { get; private set; }
-
+        
         private HolidayApplication()
         {
         }
@@ -22,7 +23,8 @@ namespace HolidayManagement.ApplicationLogic.Models
         public static HolidayApplication Create(Holiday holiday,
                                                 Employee employee,
                                                 DateTime startDay,
-                                                DateTime endDay)
+                                                DateTime endDay,
+                                                string reasons)
         {
             return new HolidayApplication 
             {
@@ -31,6 +33,7 @@ namespace HolidayManagement.ApplicationLogic.Models
                 Employee = employee,
                 StartDay = startDay,
                 EndDay = endDay,
+                Reasons = reasons,
                 Status = StatusApplication.Active
             };
         }
@@ -47,10 +50,10 @@ namespace HolidayManagement.ApplicationLogic.Models
             return this.Manager;
         }
 
-        public string SetMessage(string message)
+        public string SetResponse(string response)
         {
-            this.Message = message;
-            return this.Message;
+            this.Response = response;
+            return this.Response;
         }
     }
 }

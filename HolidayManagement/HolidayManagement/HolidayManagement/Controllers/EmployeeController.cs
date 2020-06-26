@@ -13,16 +13,19 @@ namespace HolidayManagement.Controllers
     public class EmployeeController : Controller
     {
         private readonly EmployeeService employeeService;
+        private readonly HolidayApplicationService holidayApplicationService;
         private readonly UserManager<IdentityUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
         public EmployeeController(EmployeeService employeeService,
                                   UserManager<IdentityUser> userManager,
-                                  RoleManager<IdentityRole> roleManager)
+                                  RoleManager<IdentityRole> roleManager,
+                                  HolidayApplicationService holidayApplicationService)
         {
             this.employeeService = employeeService;
             this.userManager = userManager;
             this.roleManager = roleManager;
+            this.holidayApplicationService = holidayApplicationService;
         }
 
         public IActionResult Index()
@@ -154,7 +157,8 @@ namespace HolidayManagement.Controllers
             {
                 var viewModel = new DetailsEmployeeViewModel
                 {
-                    Employee = employeeService.GetById(id)
+                    Employee = employeeService.GetById(id),
+                    HolidayApplications = holidayApplicationService.GetAllForEmployee(id)
                 };
 
                 return PartialView("_Details", viewModel);

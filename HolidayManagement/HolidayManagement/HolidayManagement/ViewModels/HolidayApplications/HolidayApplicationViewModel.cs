@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HolidayManagement.ViewModels.Employees
+namespace HolidayManagement.ViewModels.HolidayApplication
 {
-    public class DetailsEmployeeViewModel
+    public class HolidayApplicationViewModel
     {
         public Employee Employee { get; set; }
         public IEnumerable<HolidayManagement.ApplicationLogic.Models.HolidayApplication> HolidayApplications { get; set; }

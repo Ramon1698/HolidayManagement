@@ -1,0 +1,44 @@
+﻿@model HolidayManagement.ViewModels.HolidayApplication.HolidayApplicationViewModel
+@using HolidayManagement.ApplicationLogic.Models
+
+
+@if (!Model.HolidayApplications.Any())
+{
+    <h1 style="color: red;">No application in holding</h1>
+}
+else
+{
+<table class="table table-hover">
+    <thead class="holidays-table">
+        <tr>
+            <th>Holiday</th>
+            <th>Employee</th>
+            <th>Period</th>
+            <th style="width: 15rem;"></th>
+        </tr>
+    </thead>
+    <tbody class="holidays-table">
+        @foreach (var holidayApplication in Model.HolidayApplications)
+        {
+            <tr>
+                <td>@holidayApplication.Holiday.Type</td>
+                <td>@holidayApplication.Employee.Name</td>
+                <td>
+                    @holidayApplication.StartDay.ToShortDateString()
+                    -
+                    @holidayApplication.EndDay.ToShortDateString()
+                </td>
+                <td>
+                    <a asp-action="Accept" asp-route-id="@holidayApplication.Id"
+                       data-ajax="true" data-ajax-update="#mainContainer">Accept</a>
+                    <span style="border-left: 1px solid lightgrey; margin: 0 0.5rem;"></span>
+                    <a asp-action="Reject" asp-route-id="@holidayApplication.Id"
+                       data-ajax="true" data-ajax-update="#mainContainer">Reject</a>
+                    <span style="border-left: 1px solid lightgrey; margin: 0 0.5rem;"></span>
+                    <a onclick="loadDetailsHolidayApplication('@holidayApplication.Id')" href="#">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}

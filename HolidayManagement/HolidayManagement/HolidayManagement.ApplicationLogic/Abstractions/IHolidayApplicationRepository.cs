@@ -8,5 +8,6 @@ namespace HolidayManagement.ApplicationLogic.Abstractions
     public interface IHolidayApplicationRepository : IBaseRepository<HolidayApplication>
     {
         IEnumerable<HolidayApplication> GetAllForEmployee(Guid id);
+        IEnumerable<HolidayApplication> GetAllActive();
     }
 }

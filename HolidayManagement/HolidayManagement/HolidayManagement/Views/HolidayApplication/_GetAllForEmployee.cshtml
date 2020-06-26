@@ -1,16 +1,9 @@
-﻿@model HolidayManagement.ViewModels.Employees.DetailsEmployeeViewModel
+﻿@model HolidayManagement.ViewModels.HolidayApplication.HolidayApplicationViewModel
 @using HolidayManagement.ApplicationLogic.Models
 
 @{ var availableDays = Model.Employee.HolidayDays - Model.Employee.ConsumedHolidayDays;}
-<div>
-    <h1 class="holiday-title">@Model.Employee.Name</h1>
-    <div>Holiday Days: <p>@availableDays / @Model.Employee.HolidayDays</p></div>
-    <div><p>Contact:</p></div>
-    <div>Email: <p>@Model.Employee.Email</p></div>
-    <div>Phone: <p>@Model.Employee.PhoneNumber</p></div>
-    
-    @if (User.IsInRole("Manager"))
-    {
+    <div><h1 class="holiday-title mb-4">Holiday Days: @availableDays / @Model.Employee.HolidayDays</h1></div>
+
     <table class="table table-hover">
         <thead class="holidays-table">
             <tr>
@@ -33,10 +26,14 @@
                     <td>@holidayApplication.Status</td>
                     <td>
                         <a onclick="loadDetailsHolidayApplication('@holidayApplication.Id')" href="#">Details</a>
+                        @if (holidayApplication.Status == StatusApplication.Active)
+                        {
+                            <span style="border-left: 1px solid lightgrey; margin: 0 0.5rem;"></span>
+                            <a asp-action="Cancel" asp-route-id="@holidayApplication.Id"
+                               data-ajax="true" data-ajax-update="#mainContainer">Cancel</a>
+                        }
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    }
-</div>

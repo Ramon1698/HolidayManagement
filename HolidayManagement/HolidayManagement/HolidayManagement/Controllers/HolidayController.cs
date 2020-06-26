@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using HolidayManagement.ApplicationLogic.Services;
 using HolidayManagement.ViewModels.Holidays;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HolidayManagement.Controllers
 {
+    [Authorize]
     public class HolidayController : Controller
     {
         private readonly HolidayService holidayService;

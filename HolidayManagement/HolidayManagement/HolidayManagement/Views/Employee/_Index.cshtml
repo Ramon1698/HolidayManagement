@@ -16,18 +16,24 @@
                 <td>@employee.Name</td>
                 <td>@employee.Email</td>
                 <td>
-                    @employee.HolidayDays
+                    @{ var availableDays = employee.HolidayDays - employee.ConsumedHolidayDays;}
+                    @availableDays
                     /
-                    @{var totalHolidayDays = employee.HolidayDays + employee.ConsumedHolidayDays;}
-                    @totalHolidayDays
+                    @employee.HolidayDays
                 </td>
                 <td>
-                    <a onclick="loadEditEmployee('@employee.Id')" href="#">Edit</a>
-                    <span style="border-left: 1px solid lightgrey; margin: 0 0.5rem;"></span>
+                    @if (User.IsInRole("HR"))
+                    {
+                        <a onclick="loadEditEmployee('@employee.Id')" href="#">Edit</a>
+                        <span style="border-left: 1px solid lightgrey; margin: 0 0.5rem;"></span>
+                    }
                     <a onclick="loadDetailsEmployee('@employee.Id')" href="#">Details</a>
-                    <span style="border-left: 1px solid lightgrey; margin: 0 0.5rem;"></span>
-                    <a asp-action="Remove" asp-route-id="@employee.Id"
-                       data-ajax="true" data-ajax-update="#mainContainer">Remove</a>
+                    @if (User.IsInRole("HR"))
+                    {
+                        <span style="border-left: 1px solid lightgrey; margin: 0 0.5rem;"></span>
+                        <a asp-action="Remove" asp-route-id="@employee.Id"
+                           data-ajax="true" data-ajax-update="#mainContainer">Remove</a>
+                    }
                 </td>
             </tr>
         }

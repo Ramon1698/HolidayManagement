@@ -28,6 +28,10 @@
                 holidaysTable();
                 addEmployee();
                 employeesTable();
+                myHolidays();
+                holidayApplication();
+                holidaysToApprove();
+                setNavBar();
             });
 
             function addHoliday() {
@@ -56,6 +60,31 @@
                     loadServerPartialView("#mainContainer", "/Employee/Index");
                     consistentStyle("employeesTable");
                 });
+            }
+
+            function holidayApplication() {
+                $("#holidayApplication").on("click", function () {
+                    loadServerPartialView("#mainContainer", "/HolidayApplication/Create");
+                    consistentStyle("holidayApplication");
+                });
+            }
+
+            function myHolidays() {
+                $("#myHolidays").on("click", function () {
+                    loadServerPartialView("#mainContainer", "/HolidayApplication/GetAllForEmployee");
+                    consistentStyle("myHolidays");
+                });
+            }
+
+            function holidaysToApprove() {
+                $("#holidaysToApprove").on("click", function () {
+                    loadServerPartialView("#mainContainer", "/HolidayApplication/GetAllActive");
+                    consistentStyle("holidaysToApprove");
+                });
+            }
+
+            function loadDetailsHolidayApplication(holidayApplicationId) {
+                loadServerPartialView("#mainContainer", "/HolidayApplication/Details?id=" + holidayApplicationId);
             }
 
             function loadEditHoliday(holidayId) {
@@ -103,6 +132,27 @@
                 }
             }
 
+            function setNavBar() {
+                @if (User.IsInRole("HR"))
+                {
+                    @: document.getElementById("holidaysToApprove").style.display = "none";
+                }
+
+                @if (User.IsInRole("Manager"))
+                {
+                    @: document.getElementById("addHoliday").style.display = "none";
+                    @: document.getElementById("addEmployee").style.display = "none";
+                }
+
+                @if (User.IsInRole("Operational"))
+                {
+                    @: document.getElementById("addHoliday").style.display = "none";
+                    @: document.getElementById("addEmployee").style.display = "none";
+                    @: document.getElementById("employeesTable").style.display = "none";
+                    @: document.getElementById("holidaysToApprove").style.display = "none";
+                }
+            }
+
             function loadServerPartialView(container, baseUrl) {
                 return $.get(baseUrl, function (responseData) {
                     $(container).html(responseData);
@@ -119,7 +169,11 @@
             <li class="nav-link" id="myHolidays">My Holidays</li>
             <li class="nav-link" id="holidayApplication">Holiday Application</li>
             <li class="nav-link" id="holidaysToApprove">Holidays To Approve</li>
-            <li class="nav-link">Log out</li>
+            <li class="nav-link">
+                <form>
+                    <a class="form-inline" asp-area="Identity" asp-page="/Account/Login" >Logout</a>
+                </form>
+            </li>
         </ul>
     </nav>
     <section class="container" id="mainContainer"></section>

@@ -1,6 +1,6 @@
 ﻿@model HolidayManagement.ViewModels.Holidays.HolidaysViewModel
 
-<table class="table table-hover" id="holidaysTable">
+<table class="table table-hover">
     <thead class="holidays-table">
         <tr>
             <th >Holiday</th>
@@ -22,11 +22,17 @@
                     <td>-</td>
                 }
             <td>
-                <a onclick="loadEditHoliday('@holiday.Id')" href="#">Edit</a>
-                <span style="border-left: 1px solid lightgrey; margin: 0 0.5rem;"></span>
+                @if (User.IsInRole("HR"))
+                {
+                    <a onclick="loadEditHoliday('@holiday.Id')" href="#">Edit</a>
+                    <span style="border-left: 1px solid lightgrey; margin: 0 0.5rem;"></span>
+                }
                 <a onclick="loadReadMoreHoliday('@holiday.Id')" href="#">Read More</a>
-                <span style="border-left: 1px solid lightgrey; margin: 0 0.5rem;"></span>
-                <a asp-action="Remove" asp-route-id="@holiday.Id">Remove</a>
+                @if (User.IsInRole("HR"))
+                {
+                    <span style="border-left: 1px solid lightgrey; margin: 0 0.5rem;"></span>
+                    <a asp-action="Remove" asp-route-id="@holiday.Id">Remove</a>
+                }
             </td>
             </tr>
         }
